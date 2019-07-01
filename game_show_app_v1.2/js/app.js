@@ -24,7 +24,6 @@ let phrases = [
 function getRandomPhraseAsArray(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
-let newPhrase = getRandomPhraseAsArray(phrases);
 
 function addPhraseToDisplay(arr) {
     for (let i = 0; i < arr.length; i++) {
@@ -36,7 +35,8 @@ function addPhraseToDisplay(arr) {
         } else {
             li.className = "space";
         }
-    }
+        
+    } $('li.space:eq(3), li.space:eq(6)').before(`<br>`);
 }
 
 function checkLetter(input) {
@@ -58,7 +58,7 @@ function checkLetter(input) {
 function checkWin() {
     function newScreen(result) {
         $overlay.addClass(result);
-        $overlay.toggle();
+        $overlay.fadeToggle(2000);
         $overlay.children('a').text('Play Again?');
         $overlay.find('h2').text(`YOU ${result.toUpperCase()}!!!!`);
     }
@@ -82,6 +82,7 @@ $startButton.on('click', function () {
     $('#phrase').html(`<ul></ul>`);
     $('.tries').show();
     missed = 0;
+    let newPhrase = getRandomPhraseAsArray(phrases);
     addPhraseToDisplay(newPhrase);
     $overlay.toggle().removeClass('win').removeClass('lose');
 });
