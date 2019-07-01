@@ -5,7 +5,7 @@ let $phrase = $('#phrase');
 let $scoreboard = $('#scoreboard');
 let $startButton = $('.btn__reset');
 let $newButton = $('.newGame');
-let hit = 0;
+let letterFound = 0;
 let missed = 0;
 
 /*---content -------------*/
@@ -43,16 +43,16 @@ function checkLetter(input) {
     $('.letter').each(function () {                       // checks each letter in the phrase...
         let value = $(this).text();
         let result = value.toLowerCase().indexOf(input);    // ...(lowercase) against the input button
-        if (result > -1) {                                  // index -1 means the value wasn't in the index, so anything above this means a hit.
+        if (result > -1) {                                  // index -1 means the value wasn't in the index, so anything above this means a letterFound.
             $(this).addClass('show');                   // add show class to phrase letter
-            hit += 1;
+            letterFound += 1;
         }
     });
-    if (hit == 0) {                                         // tests if there were any (multiple or singular) hits and if not, it was a singular miss.
+    if (letterFound == 0) {                                         // tests if there were any (multiple or singular) letterFounds and if not, it was a singular miss.
         missed += 1;
         $(`.tries:nth-child(${missed})`).toggle();
     }
-    hit = 0;                                                // resets the hit count.
+    letterFound = 0;                                                // resets the letterFound count.
 }
 
 function checkWin() {
